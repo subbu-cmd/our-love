@@ -1,0 +1,53 @@
+[
+  {
+    "id": "1774286379645",
+    "senderId": "user1",
+    "text": "Hello my beautiful love",
+    "imageUrl": null,
+    "voiceUrl": null,
+    "timestamp": "2026-03-23T17:19:39.645Z",
+    "status": "read"
+  },
+  {
+    "id": "1774286452064",
+    "senderId": "user2",
+    "text": "Hey there! This app looks amazing.",
+    "imageUrl": null,
+    "voiceUrl": null,
+    "timestamp": "2026-03-23T17:20:52.064Z",
+    "status": "read"
+  },
+  {
+    "id": "1774286658603",
+    "senderId": "user2",
+    "text": "hii",
+    "imageUrl": null,
+    "voiceUrl": null,
+    "timestamp": "2026-03-23T17:24:18.603Z",
+    "status": "read"
+  },
+  {
+    "id": "1774286824171",
+    "senderId": "user1",
+    "text": "hii",
+    "imageUrl": null,
+    "voiceUrl": null,
+    "timestamp": "2026-03-23T17:27:04.171Z",
+    "status": "read"
+  },
+  {
+    "id": "1774287829997hsxwo",
+    "senderId": "user1",
+    "text": "Testing v2!",
+    "mediaUrl": null,
+    "mediaType": null,
+    "voiceUrl": null,
+    "replyTo": null,
+    "timestamp": "2026-03-23T17:43:49.997Z",
+    "status": "read",
+    "reactions": {},
+    "isEdited": false,
+    "isDeleted": false,
+    "isPinned": false
+  }
+]
