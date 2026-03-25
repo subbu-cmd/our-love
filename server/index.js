@@ -37,11 +37,14 @@ const upload = multer({ storage });
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://your-vercel-app.vercel.app",
+    origin: [
+      "https://our-love-k1qf.vercel.app",
+      process.env.CLIENT_URL
+    ].filter(Boolean),
     methods: ["GET", "POST"]
   },
   maxHttpBufferSize: 1e8 // 100MB for largish payloads
-  });
+});
 
 // JSON DB setup
 const dbMessagesFile = path.join(__dirname, 'messages.json');
@@ -317,6 +320,9 @@ io.on('connection', (socket) => {
     console.log('User disconnected:', socket.id);
   });
 });
+
+// Health check
+app.get('/', (req, res) => res.json({ status: 'ok', message: 'Couple Chat Server is running' }));
 
 const PORT = process.env.PORT || 4000;
 server.listen(PORT, () => {

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Heart, Lock, User as UserIcon } from 'lucide-react';
 import { useAppContext } from '../../components/Providers';
 
-const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL ;
+const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL;
 
 export default function AuthPage() {
   const router = useRouter();
@@ -25,7 +25,7 @@ export default function AuthPage() {
     setLoading(true);
 
     const endpoint = isLogin ? '/api/login' : '/api/signup';
-    
+
     // Client-side validation
     if (!isLogin && password !== confirmPassword) {
       setError('Passwords do not match');
@@ -33,34 +33,34 @@ export default function AuthPage() {
       return;
     }
 
-    const payload = isLogin 
-      ? { identifier: username, password } 
+    const payload = isLogin
+      ? { identifier: username, password }
       : { username, email, password, confirmPassword };
-    
+
     try {
       const res = await fetch(`${SOCKET_URL}${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-      
+
       const data = await res.json();
-      
+
       if (res.ok && data.success) {
         setUser(data.user);
-        
+
         // Save to localStorage for persistence
         const storageData: any = { user: data.user };
-        
+
         if (data.pairId) {
           storageData.pairId = data.pairId;
           storageData.partner = data.partner;
           setPairId(data.pairId);
           setPartner(data.partner);
         }
-        
+
         localStorage.setItem('userData', JSON.stringify(storageData));
-        
+
         if (data.pairId) {
           router.push('/chat');
         } else {
@@ -79,17 +79,17 @@ export default function AuthPage() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-rose-50 dark:bg-gray-950 font-sans p-4">
       <div className="bg-white dark:bg-gray-900 rounded-[2.5rem] shadow-2xl w-full max-w-md p-8 sm:p-12 flex flex-col items-center border border-rose-100 dark:border-gray-800 transition-colors duration-500 relative overflow-hidden">
-        
+
         {/* Decorative background blur */}
         <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-br from-rose-200 to-pink-300 dark:from-rose-900/30 dark:to-purple-900/30 opacity-40 blur-3xl z-0" />
-        
+
         <div className="z-10 flex flex-col items-center w-full">
           <Heart className="w-16 h-16 text-rose-500 fill-rose-500 drop-shadow-lg mb-6 animate-bounce" />
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white mb-2">
             {isLogin ? 'Welcome Back' : 'Create Our Space'}
           </h1>
           <p className="text-gray-500 dark:text-gray-400 text-sm mb-8 text-center max-w-[250px]">
-             {isLogin ? 'Enter your credentials to return to your private universe.' : 'Sign up to start a secure, encrypted dimension for just you and your love.'}
+            {isLogin ? 'Enter your credentials to return to your private universe.' : 'Sign up to start a secure, encrypted dimension for just you and your love.'}
           </p>
 
           {error && (
@@ -109,13 +109,13 @@ export default function AuthPage() {
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <UserIcon className="h-5 w-5 text-gray-400" />
               </div>
-              <input 
-                type="text" 
-                placeholder={isLogin ? "Email or Username" : "Username"} 
-                required 
-                value={username} 
-                onChange={e => setUsername(e.target.value)} 
-                className="w-full bg-gray-50 dark:bg-gray-800 border-none pl-12 pr-5 py-4 rounded-2xl focus:ring-2 focus:ring-rose-500 transition-all outline-none dark:text-white" 
+              <input
+                type="text"
+                placeholder={isLogin ? "Email or Username" : "Username"}
+                required
+                value={username}
+                onChange={e => setUsername(e.target.value)}
+                className="w-full bg-gray-50 dark:bg-gray-800 border-none pl-12 pr-5 py-4 rounded-2xl focus:ring-2 focus:ring-rose-500 transition-all outline-none dark:text-white"
               />
             </div>
 
@@ -124,28 +124,28 @@ export default function AuthPage() {
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <UserIcon className="h-5 w-5 text-gray-400" />
                 </div>
-                <input 
-                  type="email" 
-                  placeholder="Email Address" 
-                  required 
-                  value={email} 
-                  onChange={e => setEmail(e.target.value)} 
-                  className="w-full bg-gray-50 dark:bg-gray-800 border-none pl-12 pr-5 py-4 rounded-2xl focus:ring-2 focus:ring-rose-500 transition-all outline-none dark:text-white" 
+                <input
+                  type="email"
+                  placeholder="Email Address"
+                  required
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  className="w-full bg-gray-50 dark:bg-gray-800 border-none pl-12 pr-5 py-4 rounded-2xl focus:ring-2 focus:ring-rose-500 transition-all outline-none dark:text-white"
                 />
               </div>
             )}
-            
+
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                 <Lock className="h-5 w-5 text-gray-400" />
               </div>
-              <input 
-                type="password" 
-                placeholder={isLogin ? "Passcode" : "Password"} 
-                required 
-                value={password} 
-                onChange={e => setPassword(e.target.value)} 
-                className="w-full bg-gray-50 dark:bg-gray-800 border-none pl-12 pr-5 py-4 rounded-2xl focus:ring-2 focus:ring-rose-500 transition-all outline-none dark:text-white" 
+              <input
+                type="password"
+                placeholder={isLogin ? "Passcode" : "Password"}
+                required
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                className="w-full bg-gray-50 dark:bg-gray-800 border-none pl-12 pr-5 py-4 rounded-2xl focus:ring-2 focus:ring-rose-500 transition-all outline-none dark:text-white"
               />
             </div>
 
@@ -154,19 +154,19 @@ export default function AuthPage() {
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <Lock className="h-5 w-5 text-gray-400" />
                 </div>
-                <input 
-                  type="password" 
-                  placeholder="Confirm Password" 
-                  required 
-                  value={confirmPassword} 
-                  onChange={e => setConfirmPassword(e.target.value)} 
-                  className="w-full bg-gray-50 dark:bg-gray-800 border-none pl-12 pr-5 py-4 rounded-2xl focus:ring-2 focus:ring-rose-500 transition-all outline-none dark:text-white" 
+                <input
+                  type="password"
+                  placeholder="Confirm Password"
+                  required
+                  value={confirmPassword}
+                  onChange={e => setConfirmPassword(e.target.value)}
+                  className="w-full bg-gray-50 dark:bg-gray-800 border-none pl-12 pr-5 py-4 rounded-2xl focus:ring-2 focus:ring-rose-500 transition-all outline-none dark:text-white"
                 />
               </div>
             )}
 
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               disabled={loading}
               className="w-full bg-rose-500 text-white font-semibold py-4 rounded-2xl hover:bg-rose-600 hover:scale-[1.02] transition-all shadow-xl shadow-rose-200 dark:shadow-rose-900/20 mt-6 disabled:opacity-70 flex items-center justify-center h-[56px]"
             >
@@ -179,9 +179,9 @@ export default function AuthPage() {
           </form>
 
           <div className="mt-8 text-center">
-            <button 
-              type="button" 
-              onClick={() => { setIsLogin(!isLogin); setError(''); setSuccess(''); }} 
+            <button
+              type="button"
+              onClick={() => { setIsLogin(!isLogin); setError(''); setSuccess(''); }}
               className="text-sm text-gray-500 dark:text-gray-400 hover:text-rose-500 dark:hover:text-rose-400 font-medium transition-colors"
             >
               {isLogin ? "Don&apos;t have an account? Sign up" : "Already have an account? Login"}
