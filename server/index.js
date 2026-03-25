@@ -86,7 +86,7 @@ app.post('/api/signup', async (req, res) => {
   if (password !== confirmPassword) {
     return res.status(400).json({ error: 'Passwords do not match' });
   }
-  
+
   // Check if username exists
   const existingUsername = Object.values(users).find(u => u.username === username);
   if (existingUsername) return res.status(400).json({ error: 'Username taken' });
@@ -97,7 +97,7 @@ app.post('/api/signup', async (req, res) => {
 
   const userId = crypto.randomUUID();
   const passwordHash = await bcrypt.hash(password, 10);
-  
+
   users[userId] = {
     id: userId,
     username,
@@ -106,14 +106,14 @@ app.post('/api/signup', async (req, res) => {
     avatar: `https://api.dicebear.com/7.x/adventurer/svg?seed=${username}`
   };
   saveDb(dbUsersFile, users);
-  
+
   res.json({ success: true, userId, user: { id: userId, username, email, avatar: users[userId].avatar } });
 });
 
 app.post('/api/login', async (req, res) => {
   const { identifier, password } = req.body; // identifier can be username or email
   const user = Object.values(users).find(u => u.username === identifier || u.email === identifier);
-  
+
   if (user && await bcrypt.compare(password, user.passwordHash)) {
     // Find if user is in a pair
     const pairId = Object.keys(pairs).find(pId => pairs[pId].user1 === user.id || pairs[pId].user2 === user.id);
@@ -123,10 +123,10 @@ app.post('/api/login', async (req, res) => {
       partnerId = pairs[pairId].user1 === user.id ? pairs[pairId].user2 : pairs[pairId].user1;
       if (partnerId) partner = { id: partnerId, username: users[partnerId]?.username, avatar: users[partnerId]?.avatar };
     }
-    
-    res.json({ 
-      success: true, 
-      userId: user.id, 
+
+    res.json({
+      success: true,
+      userId: user.id,
       user: { id: user.id, username: user.username, email: user.email, avatar: user.avatar },
       pairId,
       partner
@@ -139,7 +139,7 @@ app.post('/api/login', async (req, res) => {
 app.post('/api/generate-invite', (req, res) => {
   const { userId } = req.body;
   if (!users[userId]) return res.status(404).json({ error: 'User not found' });
-  
+
   const existingPair = Object.keys(pairs).find(pId => pairs[pId].user1 === userId || pairs[pId].user2 === userId);
   if (existingPair) return res.status(400).json({ error: 'User already paired' });
 
@@ -151,25 +151,25 @@ app.post('/api/generate-invite', (req, res) => {
 app.post('/api/pair', (req, res) => {
   const { userId, code } = req.body; // userId is the person accepting
   if (!users[userId]) return res.status(404).json({ error: 'User not found' });
-  
+
   const partnerId = activeInvites[code];
   if (!partnerId) return res.status(404).json({ error: 'Invalid or expired code' });
   if (partnerId === userId) return res.status(400).json({ error: 'Cannot pair with yourself' });
-  
+
   const existingPair = Object.keys(pairs).find(pId => pairs[pId].user1 === userId || pairs[pId].user2 === userId);
   if (existingPair) return res.status(400).json({ error: 'User already paired' });
 
   const pairId = crypto.randomUUID();
   pairs[pairId] = { user1: partnerId, user2: userId };
   saveDb(dbPairsFile, pairs);
-  
+
   delete activeInvites[code]; // consume code
-  
+
   const partner = users[partnerId];
-  res.json({ 
-    success: true, 
-    pairId, 
-    partner: { id: partnerId, username: partner.username, avatar: partner.avatar } 
+  res.json({
+    success: true,
+    pairId,
+    partner: { id: partnerId, username: partner.username, avatar: partner.avatar }
   });
 });
 
@@ -191,13 +191,13 @@ const onlineUsers = new Map(); // socketId -> userId
 
 io.on('connection', (socket) => {
   console.log('User connected:', socket.id);
-  
+
   // For standard user joining
   socket.on('user_joined', ({ userId, pairId }) => {
     socket.userId = userId;
     socket.pairId = pairId;
     onlineUsers.set(socket.id, userId);
-    
+
     if (pairId) {
       socket.join(pairId);
       // Notify partner
@@ -230,7 +230,7 @@ io.on('connection', (socket) => {
     saveDb(dbMessagesFile, messages);
     io.to(pairId).emit('receive_message', newMsg);
   });
-  
+
   socket.on('edit_message', ({ messageId, text }) => {
     const msg = messages.find(m => m.id === messageId);
     if (msg && !msg.isDeleted && msg.pairId === socket.pairId) {
@@ -296,7 +296,7 @@ io.on('connection', (socket) => {
   socket.on('call_user', (data) => {
     if (socket.pairId) socket.to(socket.pairId).emit('incoming_call', data);
   });
-  
+
   socket.on('answer_call', (data) => {
     if (socket.pairId) socket.to(socket.pairId).emit('call_answered', data);
   });
