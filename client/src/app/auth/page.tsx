@@ -80,10 +80,7 @@ export default function AuthPage() {
     <div className="flex items-center justify-center min-h-screen bg-rose-50 dark:bg-gray-950 font-sans p-4">
       <div className="bg-white dark:bg-gray-900 rounded-[2.5rem] shadow-2xl w-full max-w-md p-8 sm:p-12 flex flex-col items-center border border-rose-100 dark:border-gray-800 transition-colors duration-500 relative overflow-hidden">
 
-        {/* Decorative background blur */}
-        <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-br from-rose-200 to-pink-300 dark:from-rose-900/30 dark:to-purple-900/30 opacity-40 blur-3xl z-0" />
-
-        <div className="z-10 flex flex-col items-center w-full">
+        <div className="flex flex-col items-center w-full">
           <Heart className="w-16 h-16 text-rose-500 fill-rose-500 drop-shadow-lg mb-6 animate-bounce" />
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white mb-2">
             {isLogin ? 'Welcome Back' : 'Create Our Space'}
