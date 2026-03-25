@@ -1,0 +1,271 @@
+
+> client@0.1.0 lint
+> eslint
+
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\app\auth\page.tsx
+  39:28  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  58:14  warning  'err' is defined but never used           @typescript-eslint/no-unused-vars
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\app\chat\page.tsx
+    6:41  warning  'MoreVertical' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               @typescript-eslint/no-unused-vars
+   28:49  warning  'setTheme' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+  109:59  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               @typescript-eslint/no-explicit-any
+  111:49  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               @typescript-eslint/no-explicit-any
+  166:16  warning  'err' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+  238:56  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @next/next/no-img-element
+  301:12  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @next/next/no-img-element
+  316:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @next/next/no-img-element
+  416:50  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\app\chat\page.tsx:416:50
+  414 |               <button 
+  415 |                 type="submit" 
+> 416 |                 disabled={!newMessage.trim() && !fileInputRef.current?.files?.length}
+      |                                                  ^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  417 |                 className={`p-3 rounded-full flex-shrink-0 transition-all ${
+  418 |                   newMessage.trim() || fileInputRef.current?.files?.length
+  419 |                     ? 'bg-rose-500 text-white shadow-lg hover:scale-105 shadow-rose-500/30'                                                                react-hooks/refs
+  416:50  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\app\chat\page.tsx:416:50
+  414 |               <button 
+  415 |                 type="submit" 
+> 416 |                 disabled={!newMessage.trim() && !fileInputRef.current?.files?.length}
+      |                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  417 |                 className={`p-3 rounded-full flex-shrink-0 transition-all ${
+  418 |                   newMessage.trim() || fileInputRef.current?.files?.length
+  419 |                     ? 'bg-rose-500 text-white shadow-lg hover:scale-105 shadow-rose-500/30'                                                         react-hooks/refs
+  416:50  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\app\chat\page.tsx:416:50
+  414 |               <button 
+  415 |                 type="submit" 
+> 416 |                 disabled={!newMessage.trim() && !fileInputRef.current?.files?.length}
+      |                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  417 |                 className={`p-3 rounded-full flex-shrink-0 transition-all ${
+  418 |                   newMessage.trim() || fileInputRef.current?.files?.length
+  419 |                     ? 'bg-rose-500 text-white shadow-lg hover:scale-105 shadow-rose-500/30'                                                 react-hooks/refs
+  418:19  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\app\chat\page.tsx:418:19
+  416 |                 disabled={!newMessage.trim() && !fileInputRef.current?.files?.length}
+  417 |                 className={`p-3 rounded-full flex-shrink-0 transition-all ${
+> 418 |                   newMessage.trim() || fileInputRef.current?.files?.length
+      |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  419 |                     ? 'bg-rose-500 text-white shadow-lg hover:scale-105 shadow-rose-500/30' 
+  420 |                     : darkMode ? 'bg-gray-800 text-gray-600' : 'bg-rose-50 text-rose-300'
+  421 |                 }`}  react-hooks/refs
+  418:40  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\app\chat\page.tsx:418:40
+  416 |                 disabled={!newMessage.trim() && !fileInputRef.current?.files?.length}
+  417 |                 className={`p-3 rounded-full flex-shrink-0 transition-all ${
+> 418 |                   newMessage.trim() || fileInputRef.current?.files?.length
+      |                                        ^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  419 |                     ? 'bg-rose-500 text-white shadow-lg hover:scale-105 shadow-rose-500/30' 
+  420 |                     : darkMode ? 'bg-gray-800 text-gray-600' : 'bg-rose-50 text-rose-300'
+  421 |                 }`}                 react-hooks/refs
+  418:40  error    Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\app\chat\page.tsx:418:40
+  416 |                 disabled={!newMessage.trim() && !fileInputRef.current?.files?.length}
+  417 |                 className={`p-3 rounded-full flex-shrink-0 transition-all ${
+> 418 |                   newMessage.trim() || fileInputRef.current?.files?.length
+      |                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^ Cannot access ref value during render
+  419 |                     ? 'bg-rose-500 text-white shadow-lg hover:scale-105 shadow-rose-500/30' 
+  420 |                     : darkMode ? 'bg-gray-800 text-gray-600' : 'bg-rose-50 text-rose-300'
+  421 |                 }`}          react-hooks/refs
+  439:16  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                @next/next/no-img-element
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\app\diary\page.tsx
+  18:17  warning  'partner' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-unused-vars
+  28:7   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\app\diary\page.tsx:28:7
+  26 |     const saved = localStorage.getItem(`diary_${user.id}`);
+  27 |     if (saved) {
+> 28 |       setEvents(JSON.parse(saved));
+     |       ^^^^^^^^^ Avoid calling setState() directly within an effect
+  29 |     } else {
+  30 |       const defaultEvents = [
+  31 |         { id: '1', title: 'The Day We Met', date: '2023-05-14', description: 'It was magical from the first hello.', icon: '✨' },  react-hooks/set-state-in-effect
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\app\gallery\page.tsx
+    5:70  warning  'X' is defined but never used                                                                                                                                                                                                                                                            @typescript-eslint/no-unused-vars
+   35:26  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+   97:20  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  132:12  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\app\pair\page.tsx
+  41:14  warning  'err' is defined but never used                                  @typescript-eslint/no-unused-vars
+  79:14  warning  'err' is defined but never used                                  @typescript-eslint/no-unused-vars
+  98:48  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\app\settings\page.tsx
+   80:18  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\app\settings\page.tsx:80:18
+  78 |     if (!user) router.push('/auth');
+  79 |     const savedBg = localStorage.getItem('chatBackground');
+> 80 |     if (savedBg) setBgImage(savedBg);
+     |                  ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  81 |   }, [user, router]);
+  82 |
+  83 |   const handleApplyTheme = (t: any) => {  react-hooks/set-state-in-effect
+   83:32  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    @typescript-eslint/no-explicit-any
+  121:16  warning  'err' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             @typescript-eslint/no-unused-vars
+  182:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @next/next/no-img-element
+  182:17  warning  img elements must have an alt prop, either with meaningful text, or an empty string for decorative images                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   jsx-a11y/alt-text
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\components\AppLock.tsx
+  27:3  error  React Hook "useEffect" is called conditionally. React Hooks must be called in the exact same order in every component render. Did you accidentally call a React Hook after an early return?  react-hooks/rules-of-hooks
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\components\CallUI.tsx
+  42:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\components\CallUI.tsx:42:7
+  40 |       interval = setInterval(() => setCallDuration(d => d + 1), 1000);
+  41 |     } else {
+> 42 |       setCallDuration(0);
+     |       ^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  43 |     }
+  44 |     return () => clearInterval(interval);
+  45 |   }, [callState]);  react-hooks/set-state-in-effect
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\components\Providers.tsx
+  39:7  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\components\Providers.tsx:39:7
+  37 |     if (storedUser) {
+  38 |       const parsed = JSON.parse(storedUser);
+> 39 |       setUser(parsed.user);
+     |       ^^^^^^^ Avoid calling setState() directly within an effect
+  40 |       setPairId(parsed.pairId);
+  41 |       setPartner(parsed.partner);
+  42 |     }                                            react-hooks/set-state-in-effect
+  64:7  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\components\Providers.tsx:64:7
+  62 |     if (user && pairId) {
+  63 |       const newSocket = io(SOCKET_URL);
+> 64 |       setSocket(newSocket);
+     |       ^^^^^^^^^ Avoid calling setState() directly within an effect
+  65 |       
+  66 |       newSocket.on('connect', () => {
+  67 |         newSocket.emit('user_joined', { userId: user.id, pairId });  react-hooks/set-state-in-effect
+  79:6  warning  React Hook useEffect has a missing dependency: 'socket'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  react-hooks/exhaustive-deps
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\hooks\useWebRTC.ts
+   33:60  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         @typescript-eslint/no-explicit-any
+   83:9   error    Error: Cannot access variable before it is declared
+
+`disableLocalVideoToSaveBandwidth` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\hooks\useWebRTC.ts:83:9
+  81 |         
+  82 |         // Adaptive Bitrate: Auto-disable our video to save bandwidth if failing
+> 83 |         disableLocalVideoToSaveBandwidth();
+     |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `disableLocalVideoToSaveBandwidth` accessed before it is declared
+  84 |         
+  85 |         // Trigger ICE restart if supported
+  86 |         if (pc.iceConnectionState === 'failed') {
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\hooks\useWebRTC.ts:99:3
+   97 |   }, [socket, incomingCallData]);
+   98 |
+>  99 |   const disableLocalVideoToSaveBandwidth = () => {
+      |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 100 |     if (localStream.current) {
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 101 |       localStream.current.getVideoTracks().forEach(track => {
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 102 |         track.enabled = false;
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 103 |       });
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 104 |       setIsVideoEnabled(false);
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 105 |     }
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 106 |   };
+      | ^^^^^ `disableLocalVideoToSaveBandwidth` is declared here
+  107 |
+  108 |   const getMediaStream = async (video: boolean = true) => {
+  109 |     try {  react-hooks/immutability
+  164:7   error    Error: Cannot access variable before it is declared
+
+`endCall` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\hooks\useWebRTC.ts:164:7
+  162 |
+  163 |     socket.on('call_ended', () => {
+> 164 |       endCall(false);
+      |       ^^^^^^^ `endCall` accessed before it is declared
+  165 |     });
+  166 |
+  167 |     socket.on('peer_disconnected', () => {
+
+C:\Users\saiab\OneDrive\Desktop\Documents\chat\couple-chat\client\src\hooks\useWebRTC.ts:228:3
+  226 |   };
+  227 |
+> 228 |   const endCall = (emit = true) => {
+      |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 229 |     if (emit && socket) {
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^
+> 230 |       socket.emit('end_call');
+      …
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^
+> 245 |     setWeakNetwork(false);
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^
+> 246 |   };
+      | ^^^^^ `endCall` is declared here
+  247 |
+  248 |   const toggleVideo = () => {
+  249 |     if (localStream.current) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             react-hooks/immutability
+  181:6   warning  React Hook useEffect has a missing dependency: 'endCall'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       react-hooks/exhaustive-deps
+
+✖ 40 problems (21 errors, 19 warnings)
+

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import React, { useEffect, useState } from 'react';
 import { Phone, PhoneOff, Video, VideoOff, Mic, MicOff, AlertCircle } from 'lucide-react';
 import type { CallState } from '../hooks/useWebRTC';

@@ -96,14 +96,14 @@ export function useWebRTC({ socket, userId }: UseWebRTCProps) {
     return pc;
   }, [socket, incomingCallData]);
 
-  const disableLocalVideoToSaveBandwidth = () => {
+  function disableLocalVideoToSaveBandwidth() {
     if (localStream.current) {
       localStream.current.getVideoTracks().forEach(track => {
         track.enabled = false;
       });
       setIsVideoEnabled(false);
     }
-  };
+  }
 
   const getMediaStream = async (video: boolean = true) => {
     try {
