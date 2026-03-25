@@ -120,6 +120,7 @@ app.post('/api/signup', async (req, res) => {
     await User.create({ id: userId, username, email, passwordHash, avatar });
     res.json({ success: true, userId, user: { id: userId, username, email, avatar } });
   } catch (err) {
+    console.error('Signup error:', err);
     res.status(500).json({ error: 'Signup failed. Please try again later.' });
   }
 });
@@ -147,6 +148,7 @@ app.post('/api/login', async (req, res) => {
       res.status(401).json({ success: false, message: 'Invalid credentials' });
     }
   } catch (err) {
+    console.error('Login error:', err);
     res.status(500).json({ error: 'Login failed.' });
   }
 });
