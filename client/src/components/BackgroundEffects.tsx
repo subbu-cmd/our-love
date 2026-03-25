@@ -22,9 +22,9 @@ export default function BackgroundEffects() {
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-      {/* Dynamic Glow Orbs */}
-      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-rose-500/10 dark:bg-rose-900/10 blur-[100px] animate-pulse-glow" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-pink-500/10 dark:bg-purple-900/10 blur-[100px] animate-pulse-glow" style={{ animationDelay: '-4s' }} />
+      {/* Dynamic Glow Orbs - Removed blur for clarity */}
+      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-rose-500/5 dark:bg-rose-900/5 animate-pulse-glow" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-pink-500/5 dark:bg-purple-900/5 animate-pulse-glow" style={{ animationDelay: '-4s' }} />
 
       {/* Floating Hearts */}
       {elements.map((el) => (
@@ -42,8 +42,8 @@ export default function BackgroundEffects() {
         </div>
       ))}
       
-      {/* Overlay for better readability if needed */}
-      <div className="absolute inset-0 bg-white/10 dark:bg-black/10 backdrop-blur-[2px]" />
+      {/* Overlay - Removed backdrop-blur */}
+      <div className="absolute inset-0 bg-white/5 dark:bg-black/5" />
     </div>
   );
 }
