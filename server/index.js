@@ -9,7 +9,13 @@ const bcrypt = require('bcrypt');
 const crypto = require('crypto'); // For generating pairing codes
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: [
+    "https://our-love-k1qf.vercel.app"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 app.use(express.json());
 
 // Setup uploads directory
@@ -30,9 +36,12 @@ const upload = multer({ storage });
 
 const server = http.createServer(app);
 const io = new Server(server, {
-  cors: { origin: '*', methods: ['GET', 'POST'] },
+  cors: {
+    origin: "https://your-vercel-app.vercel.app",
+    methods: ["GET", "POST"]
+  },
   maxHttpBufferSize: 1e8 // 100MB for largish payloads
-});
+  });
 
 // JSON DB setup
 const dbMessagesFile = path.join(__dirname, 'messages.json');
