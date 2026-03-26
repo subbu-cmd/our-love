@@ -17,13 +17,14 @@ type MediaItem = {
 
 export default function GalleryPage() {
   const router = useRouter();
-  const { user, pairId, partner, theme } = useAppContext();
+  const { user, pairId, partner, theme, isHydrating } = useAppContext();
   
   const [media, setMedia] = useState<MediaItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [fullscreenImage, setFullscreenImage] = useState<string | null>(null);
 
   useEffect(() => {
+    if (isHydrating) return;
     if (!user) { router.push('/auth'); return; }
     
     // Fetch all messages for the pair and extract media

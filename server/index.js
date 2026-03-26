@@ -10,11 +10,14 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const app = express();
+const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3000";
+const ALLOWED_ORIGINS = [
+  "https://our-love-k1qf.vercel.app",
+  CLIENT_URL
+].filter(Boolean);
+
 app.use(cors({
-  origin: [
-    "https://our-love-k1qf.vercel.app",
-    process.env.CLIENT_URL
-  ].filter(Boolean),
+  origin: ALLOWED_ORIGINS,
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
@@ -87,10 +90,7 @@ const upload = multer({ storage });
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: [
-      "https://our-love-k1qf.vercel.app",
-      process.env.CLIENT_URL
-    ].filter(Boolean),
+    origin: ALLOWED_ORIGINS,
     methods: ["GET", "POST"]
   },
   maxHttpBufferSize: 1e8

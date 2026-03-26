@@ -5,7 +5,7 @@ import { Lock, Delete, Fingerprint } from 'lucide-react';
 import { useAppContext } from './Providers';
 
 export function AppLock({ children }: { children: React.ReactNode }) {
-  const { appLocked, setAppLocked } = useAppContext();
+  const { appLocked, setAppLocked, isHydrating } = useAppContext();
   const [pin, setPin] = useState('');
   const [error, setError] = useState(false);
   const [savedPin, setSavedPin] = useState<string | null>(null);
@@ -33,8 +33,8 @@ export function AppLock({ children }: { children: React.ReactNode }) {
 
   const handleDelete = () => setPin(p => p.slice(0, -1));
 
-  // If no PIN is set, or it's unlocked, render app
-  if (!appLocked || !savedPin) return <>{children}</>;
+  // If we are still hydrating, or no PIN is set, or it's unlocked, render app
+  if (isHydrating || !appLocked || !savedPin) return <>{children}</>;
 
   return (
     <div className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-gray-950/95 backdrop-blur-3xl font-sans text-white transition-all duration-500">

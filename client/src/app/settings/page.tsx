@@ -66,7 +66,7 @@ const predefinedThemes = [
 
 export default function SettingsPage() {
   const router = useRouter();
-  const { user, theme, setTheme, logout } = useAppContext();
+  const { user, theme, setTheme, logout, isHydrating } = useAppContext();
   
   const [pin, setPin] = useState('');
   const [confirmPin, setConfirmPin] = useState('');
@@ -76,10 +76,11 @@ export default function SettingsPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    if (isHydrating) return;
     if (!user) router.push('/auth');
     const savedBg = localStorage.getItem('chatBackground');
     if (savedBg) setBgImage(savedBg);
-  }, [user, router]);
+  }, [user, router, isHydrating]);
 
   const handleApplyTheme = (t: any) => {
     // We update the root CSS variables for dynamic coloring

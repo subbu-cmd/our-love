@@ -20,6 +20,7 @@ interface AppContextType {
   setTheme: (theme: string) => void;
   appLocked: boolean;
   setAppLocked: React.Dispatch<React.SetStateAction<boolean>>;
+  isHydrating: boolean;
   logout: () => void;
 }
 
@@ -31,7 +32,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
   const [partner, setPartner] = useState<User | null>(null);
   const [socket, setSocket] = useState<Socket | null>(null);
   const [theme, setTheme] = useState('light');
-  const [appLocked, setAppLocked] = useState(false); // Can be initially true if a PIN is set
+  const [appLocked, setAppLocked] = useState(false);
+  const [isHydrating, setIsHydrating] = useState(true);
 
   useEffect(() => {
     // Rehydrate user from local storage
@@ -49,6 +51,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
     // Check if App Lock is enabled
     const pin = localStorage.getItem('appPin');
     if (pin) setAppLocked(true);
+    
+    setIsHydrating(false);
   }, []);
 
   useEffect(() => {
@@ -97,6 +101,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
       socket, 
       theme, setTheme, 
       appLocked, setAppLocked,
+      isHydrating,
       logout
     }}>
       {children}

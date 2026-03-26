@@ -25,7 +25,7 @@ type Message = {
 
 export default function CoupleChat() {
   const router = useRouter();
-  const { user, pairId, partner, socket, theme, setTheme } = useAppContext();
+  const { user, pairId, partner, socket, theme, setTheme, isHydrating } = useAppContext();
   
   // Encryption Key
   const [aesKey, setAesKey] = useState<CryptoKey | null>(null);
@@ -60,9 +60,10 @@ export default function CoupleChat() {
 
   // Initial redirect if not auth'd
   useEffect(() => {
+    if (isHydrating) return;
     if (!user) router.push('/auth');
     else if (!pairId) router.push('/pair');
-  }, [user, pairId, router]);
+  }, [user, pairId, router, isHydrating]);
 
   // Fetch messages
   useEffect(() => {

@@ -5,11 +5,11 @@ import { useRouter } from 'next/navigation';
 import { Heart, Lock, User as UserIcon } from 'lucide-react';
 import { useAppContext } from '../../components/Providers';
 
-const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL;
+const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://127.0.0.1:4000';
 
 export default function AuthPage() {
   const router = useRouter();
-  const { setUser, setPairId, setPartner } = useAppContext();
+  const { setUser, setPairId, setPartner, user, pairId, isHydrating } = useAppContext();
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -18,6 +18,15 @@ export default function AuthPage() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
+
+  // Inverse redirect: if already logged in, go to chat or pair
+  React.useEffect(() => {
+    if (isHydrating) return;
+    if (user) {
+      if (pairId) router.push('/chat');
+      else router.push('/pair');
+    }
+  }, [user, pairId, isHydrating, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

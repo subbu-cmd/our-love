@@ -16,11 +16,13 @@ type Event = {
 
 export default function DiaryPage() {
   const router = useRouter();
-  const { user, partner, theme } = useAppContext();
+  const { user, partner, theme, isHydrating } = useAppContext();
   
   const [events, setEvents] = useState<Event[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (isHydrating) return;
     if (!user) { router.push('/auth'); return; }
     
     // Load events from LocalStorage or use some romantic defaults
