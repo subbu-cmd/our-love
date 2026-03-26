@@ -37,15 +37,18 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const checkStatus = async (userId: string) => {
+      console.log("[Hydration] Checking status for user:", userId);
       try {
         const res = await fetch(`${SOCKET_URL}/api/user-status/${userId}`);
         const data = await res.json();
+        console.log("[Hydration] Received status data:", data);
         if (res.ok && data.success && data.pairId) {
+          console.log("[Hydration] Successfully recovered pairId:", data.pairId);
           setPairId(data.pairId);
           setPartner(data.partner);
         }
       } catch (err) {
-        console.error("Status check failed", err);
+        console.error("[Hydration] Status check failed", err);
       } finally {
         setIsHydrating(false);
       }
