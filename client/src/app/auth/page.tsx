@@ -58,19 +58,9 @@ export default function AuthPage() {
       if (res.ok && data.success) {
         setUser(data.user);
 
-        // Save to localStorage for persistence
-        const storageData: any = { user: data.user };
-
         if (data.pairId) {
-          storageData.pairId = data.pairId;
-          storageData.partner = data.partner;
           setPairId(data.pairId);
           setPartner(data.partner);
-        }
-
-        localStorage.setItem('userData', JSON.stringify(storageData));
-
-        if (data.pairId) {
           router.push('/chat');
         } else {
           router.push('/pair');

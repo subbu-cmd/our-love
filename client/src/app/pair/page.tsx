@@ -66,11 +66,6 @@ export default function PairPage() {
       });
       const data = await res.json();
       if (res.ok && data.success) {
-        const storageData = JSON.parse(localStorage.getItem('userData') || '{}');
-        storageData.pairId = data.pairId;
-        storageData.partner = data.partner;
-        localStorage.setItem('userData', JSON.stringify(storageData));
-        
         setPairId(data.pairId);
         setPartner(data.partner);
         router.push('/chat');

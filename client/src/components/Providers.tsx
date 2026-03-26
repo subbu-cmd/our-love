@@ -39,10 +39,16 @@ export function Providers({ children }: { children: React.ReactNode }) {
     // Rehydrate user from local storage
     const storedUser = localStorage.getItem('userData');
     if (storedUser) {
-      const parsed = JSON.parse(storedUser);
-      setUser(parsed.user);
-      setPairId(parsed.pairId);
-      setPartner(parsed.partner);
+      try {
+        const parsed = JSON.parse(storedUser);
+        if (parsed.user) {
+          setUser(parsed.user);
+          setPairId(parsed.pairId || null);
+          setPartner(parsed.partner || null);
+        }
+      } catch (err) {
+        console.error("Failed to parse stored userData", err);
+      }
     }
 
     const storedTheme = localStorage.getItem('theme');
@@ -55,12 +61,25 @@ export function Providers({ children }: { children: React.ReactNode }) {
     setIsHydrating(false);
   }, []);
 
+  // Auto-sync state to localStorage whenever it changes
+  useEffect(() => {
+    if (isHydrating) return; // Wait until initial hydration is done
+    
+    if (user) {
+      const storageData = { user, pairId, partner };
+      localStorage.setItem('userData', JSON.stringify(storageData));
+    } else {
+      localStorage.removeItem('userData');
+    }
+  }, [user, pairId, partner, isHydrating]);
+
   useEffect(() => {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
     }
+    localStorage.setItem('theme', theme);
   }, [theme]);
 
   // Handle Socket Connection globally when user is signed in
