@@ -9,7 +9,7 @@ const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://127.0.0.1:4000'
 
 export default function PairPage() {
   const router = useRouter();
-  const { user, setPairId, setPartner, isHydrating } = useAppContext();
+  const { user, pairId, setPairId, setPartner, isHydrating } = useAppContext();
   
   const [inviteCode, setInviteCode] = useState('');
   const [inputCode, setInputCode] = useState('');
@@ -21,8 +21,10 @@ export default function PairPage() {
     if (isHydrating) return;
     if (!user) {
       router.push('/auth');
+    } else if (pairId) {
+      router.push('/chat');
     }
-  }, [user, router, isHydrating]);
+  }, [user, pairId, router, isHydrating]);
 
   const generateInvite = async () => {
     setError('');

@@ -153,6 +153,30 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+app.get('/api/user-status/:userId', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const user = await User.findOne({ id: userId });
+    if (!user) return res.status(404).json({ error: 'User not found' });
+
+    const pair = await Pair.findOne({ $or: [{ user1: userId }, { user2: userId }] });
+    let partner = null;
+    if (pair) {
+      const partnerId = pair.user1 === userId ? pair.user2 : pair.user1;
+      const pUser = await User.findOne({ id: partnerId });
+      partner = { id: pUser.id, username: pUser.username, avatar: pUser.avatar };
+    }
+
+    res.json({
+      success: true,
+      pairId: pair?.pairId || null,
+      partner
+    });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch status' });
+  }
+});
+
 app.post('/api/generate-invite', async (req, res) => {
   const { userId } = req.body;
   const user = await User.findOne({ id: userId });
@@ -183,6 +207,17 @@ app.post('/api/pair', async (req, res) => {
   delete activeInvites[code];
 
   const partnerUser = await User.findOne({ id: partnerId });
+  
+  // Real-time update: notify both users via their private rooms
+  io.to(userId).emit('paired', { 
+    pairId, 
+    partner: { id: partnerId, username: partnerUser.username, avatar: partnerUser.avatar } 
+  });
+  io.to(partnerId).emit('paired', { 
+    pairId, 
+    partner: { id: user.id, username: user.username, avatar: user.avatar } 
+  });
+
   res.json({
     success: true,
     pairId,
@@ -211,6 +246,10 @@ io.on('connection', (socket) => {
     socket.userId = userId;
     socket.pairId = pairId;
     onlineUsers.set(socket.id, userId);
+    
+    // Join a private room for the individual user (for pairing updates)
+    socket.join(userId);
+    
     if (pairId) {
       socket.join(pairId);
       io.to(pairId).emit('online_status', Array.from(new Set(onlineUsers.values())));

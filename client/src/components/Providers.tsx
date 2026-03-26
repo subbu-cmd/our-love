@@ -36,15 +36,39 @@ export function Providers({ children }: { children: React.ReactNode }) {
   const [isHydrating, setIsHydrating] = useState(true);
 
   useEffect(() => {
-    // Rehydrate user from local storage
+    const checkStatus = async (userId: string) => {
+      try {
+        const res = await fetch(`${SOCKET_URL}/api/user-status/${userId}`);
+        const data = await res.json();
+        if (res.ok && data.success && data.pairId) {
+          setPairId(data.pairId);
+          setPartner(data.partner);
+        }
+      } catch (err) {
+        console.error("Status check failed", err);
+      } finally {
+        setIsHydrating(false);
+      }
+    };
+
     const storedUser = localStorage.getItem('userData');
     if (storedUser) {
       try {
         const parsed = JSON.parse(storedUser);
         if (parsed.user) {
           setUser(parsed.user);
-          setPairId(parsed.pairId || null);
+          const pId = parsed.pairId || null;
+          setPairId(pId);
           setPartner(parsed.partner || null);
+          
+          // Verification check: if user is found but pairId is missing locally, 
+          // or just to be 100% sure, check the server.
+          // Note: we ONLY set isHydrating to false inside checkStatus if we find a user,
+          // OR if we skip it.
+          if (parsed.user.id) {
+            checkStatus(parsed.user.id);
+            return; // Exit early, checkStatus will finish hydration
+          }
         }
       } catch (err) {
         console.error("Failed to parse stored userData", err);
@@ -84,12 +108,18 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
   // Handle Socket Connection globally when user is signed in
   useEffect(() => {
-    if (user && pairId) {
+    if (user) {
       const newSocket = io(SOCKET_URL);
       setSocket(newSocket);
       
       newSocket.on('connect', () => {
         newSocket.emit('user_joined', { userId: user.id, pairId });
+      });
+
+      // Listen for real-time pairing updates
+      newSocket.on('paired', (data: { pairId: string, partner: User }) => {
+        setPairId(data.pairId);
+        setPartner(data.partner);
       });
 
       return () => {
@@ -101,7 +131,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
         setSocket(null);
       }
     }
-  }, [user, pairId]);
+  }, [user]); // Only depend on user, as pairId might change later
 
   const logout = () => {
     setUser(null);
