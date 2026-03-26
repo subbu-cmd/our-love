@@ -10,20 +10,22 @@ export default function SplashScreen() {
   const { user, pairId, isHydrating } = useAppContext();
   const [showSplash, setShowSplash] = useState(true);
 
+  // Splash screen timer - only runs once on mount
   useEffect(() => {
-    // Artificial delay for splash screen animation
     const timer = setTimeout(() => {
       setShowSplash(false);
-      // Wait for hydration to complete before redirecting
-      if (!isHydrating) {
-        if (!user) router.push('/auth');
-        else if (!pairId) router.push('/pair');
-        else router.push('/chat');
-      }
     }, 2500);
-
     return () => clearTimeout(timer);
-  }, [user, pairId, router, isHydrating]);
+  }, []);
+
+  // Redirection logic - waits for both splash to finish and hydration to complete
+  useEffect(() => {
+    if (!showSplash && !isHydrating) {
+      if (!user) router.push('/auth');
+      else if (!pairId) router.push('/pair');
+      else router.push('/chat');
+    }
+  }, [showSplash, isHydrating, user, pairId, router]);
 
   return (
     <div className={`fixed inset-0 flex flex-col items-center justify-center bg-gray-950 z-[100] transition-opacity duration-1000 ${showSplash ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
